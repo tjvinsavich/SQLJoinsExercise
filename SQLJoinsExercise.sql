@@ -31,10 +31,17 @@ LEFT JOIN sales AS s ON p.ProductID = s.ProductID
 WHERE p.Name = "Eagles: Hotel California";
 -- joins: find Product name, reviewer name, rating, and comment on the Visio TV. (only return for the lowest rating!)
 
-
+SELECT p.Name, r.Reviewer, r.Rating, r.Comment FROM products AS p
+LEFT JOIN reviews AS r ON p.ProductID = r.ProductID
+WHERE p.Name = "Visio TV"
+LIMIT 1;
 
 
 
 -------------------------------------------- Extra - May be difficult
 /* Your goal is to write a query that serves as an employee sales report.
 This query should return the employeeID, the employee's first and last name, the name of each product, how many of that product they sold */
+SELECT e.EmployeeID, e.FirstName, e.LastName, p.Name AS PRODUCT_NAME, s.Quantity AS TOTAL_SOLD FROM employees AS e
+INNER JOIN sales AS s ON e.EmployeeID = s.EmployeeID
+INNER JOIN products AS p on s.ProductID = p.ProductID
+ORDER BY e.EmployeeID;
